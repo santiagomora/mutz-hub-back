@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Category
- * 
+ *
  * @property string $cat_description
  * @property int $cat_id
- * 
+ *
  * @property Collection|Menu[] $menus
  *
  * @package App\Models
@@ -32,5 +32,9 @@ class Category extends Model
 	public function menus()
 	{
 		return $this->hasMany(Menu::class, 'men_category');
+	}
+
+	public function extras(){
+		return $this->hasMany(ExtraIngredient::class, 'ext_category_id','cat_category');
 	}
 }

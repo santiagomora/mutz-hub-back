@@ -14,8 +14,9 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
+        'providers' => 'clients'
     ],
 
     /*
@@ -40,12 +41,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+            'provider' => 'clients',
+            'hash' => false
         ],
+        'clients' => [
+            'driver' => 'auth.custom',
+            'provider' => 'clients',
+            'hash' => true
+        ],
+        'shops' => [
+            'driver' => 'auth.custom',
+            'provider' => 'shops',
+            'hash' => true
+        ]
     ],
 
     /*
@@ -64,17 +74,19 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
     'providers' => [
-        'users' => [
+        'clients' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Client::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'shops' => [
+            'driver' => 'eloquent',
+            'model' => App\Shop::class,
+        ],
+        /*'users' => [
+            'table' => 'users',
+            'driver' => 'database',
+        ]*/
     ],
 
     /*
@@ -93,8 +105,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'clients' => [
+            'provider' => 'clients',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'shops' => [
+            'provider' => 'shops',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

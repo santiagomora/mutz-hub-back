@@ -11,18 +11,19 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Order
- * 
+ *
  * @property int $ord_id
  * @property int $ord_shop
  * @property string|null $ord_observations
- * @property string $ord_cli_address
+ * @property int $ord_cli_address
  * @property string $ord_cli_telephone
  * @property string $ord_cli_name
  * @property Carbon $ord_date
- * @property float $ord_total_EUR
- * @property float $ord_total_DOL
- * 
+ * @property float $ord_total
+ * @property int $ord_currency
+ *
  * @property Shop $shop
+ * @property Currency $currency
  *
  * @package App\Models
  */
@@ -34,8 +35,8 @@ class Order extends Model
 
 	protected $casts = [
 		'ord_shop' => 'int',
-		'ord_total_EUR' => 'float',
-		'ord_total_DOL' => 'float'
+		'ord_total' => 'float',
+		'ord_currency' => 'int'
 	];
 
 	protected $dates = [
@@ -48,13 +49,40 @@ class Order extends Model
 		'ord_cli_address',
 		'ord_cli_telephone',
 		'ord_cli_name',
+		'ord_cli_email',
 		'ord_date',
-		'ord_total_EUR',
-		'ord_total_DOL'
+		'ord_total',
+		'ord_currency',
+		'ord_cli_id'
 	];
 
-	public function shop()
-	{
-		return $this->belongsTo(Shop::class, 'ord_shop');
+	public function shop(){
+		return $this->belongsTo(\App\Shop::class, 'ord_shop');
 	}
+
+	public function menu(){
+		return $this->hasMany(OrdersMenu::class, 'om_order_id','ord_id');
+	}
+
+	public function currency()
+	{
+		return $this->belongsTo(Currency::class, 'ord_currency');
+	}
+
+	static public function cast($shop,$client,$currency,$total){
+        return [
+			"ord_cli_id" => isset($client["ord_cli_id"])
+							? $client["ord_cli_id"]
+							: null,
+            "ord_shop" => $shop["id"],
+            "ord_observations" => $client["ord_observations"],
+    		'ord_cli_address' => $client['ord_cli_address'],
+    		'ord_cli_telephone' => $client['ord_cli_telephone'],
+            'ord_cli_email' => $client['ord_cli_email'],
+    		'ord_cli_name' => $client['ord_cli_name'],
+    		'ord_date' => Carbon::now(),
+    		'ord_total' => $total,
+    		'ord_currency' => $currency
+        ];
+    }
 }

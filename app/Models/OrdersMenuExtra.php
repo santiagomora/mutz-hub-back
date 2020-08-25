@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrdersMenuExtra
- * 
+ *
  * @property int $ome_order_menu_id
  * @property int $ome_extra_id
- * 
+ *
  * @property OrdersMenu $orders_menu
  * @property ExtraIngredient $extra_ingredient
  *
@@ -43,5 +43,12 @@ class OrdersMenuExtra extends Model
 	public function extra_ingredient()
 	{
 		return $this->belongsTo(ExtraIngredient::class, 'ome_extra_id');
+	}
+
+	static public function cast($men,$ext){
+		return [
+			'ome_order_menu_id' => $men,
+			'ome_extra_id' => $ext
+		];
 	}
 }

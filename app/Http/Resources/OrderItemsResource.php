@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+use \App\Http\Resources\OrderExtraResource;
+use \App\Http\Resources\OrderVariationsResource;
+
+class OrderItemsResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        $menu = $this->menu;
+        return [
+            "name" => $menu->men_name,
+            "description" => $menu->men_description,
+            "om_quantity" => $this->om_quantity,
+            "om_price" => $this->om_price,
+            "om_currency" => $this->om_currency,
+            "variations" => OrderVariationsResource::collection($this->variations),
+            "extras" => OrderExtraResource::collection($this->extras)
+        ];
+    }
+}

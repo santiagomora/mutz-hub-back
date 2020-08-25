@@ -4,22 +4,22 @@
  * Created by Reliese Model.
  */
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Menu
- * 
+ *
  * @property int $men_id
  * @property int $men_shop
  * @property string $men_name
  * @property string $men_description
  * @property string $men_picture
  * @property int $men_category
- * @property float $men_base_EUR
- * @property float $men_base_DOL
- * 
+ * @property float $men_base_price
+ *
  * @property Shop $shop
  * @property Category $category
  *
@@ -34,8 +34,7 @@ class Menu extends Model
 	protected $casts = [
 		'men_shop' => 'int',
 		'men_category' => 'int',
-		'men_base_EUR' => 'float',
-		'men_base_DOL' => 'float'
+		'men_base_price' => 'float'
 	];
 
 	protected $fillable = [
@@ -44,17 +43,29 @@ class Menu extends Model
 		'men_description',
 		'men_picture',
 		'men_category',
-		'men_base_EUR',
-		'men_base_DOL'
+		'men_base_price'
 	];
 
 	public function shop()
 	{
-		return $this->belongsTo(Shop::class, 'men_shop');
+		return $this->belongsTo(\App\Shop::class, 'men_shop');
 	}
 
-	public function category()
-	{
+	public function orders(){
+		return $this->hasMany(OrdersMenu::class, 'om_menu_id','men_id');
+	}
+
+	public function variations(){
+		return $this->belongsToMany(
+			\App\Models\Variation::class,
+			'menu_variation',
+			'mv_menu_id',
+			'mv_variation_id'
+		);
+	}
+
+	public function category(){
 		return $this->belongsTo(Category::class, 'men_category');
 	}
+
 }

@@ -1,84 +1,86 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
+namespace App;
 
-namespace App\Models;
-
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\CustomAuthMethods;
+use Carbon\Carbon;
 
-/**
- * Class Shop
- *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string $sho_pic
- * @property string $api_token
- *
- * @property Collection|ExtraIngredient[] $extra_ingredients
- * @property Collection|Menu[] $menus
- * @property Collection|Order[] $orders
- * @property Collection|Variation[] $variations
- *
- * @package App\Models
- */
- namespace App;
+ class Shop extends Authenticatable {
 
-class Shop extends Authenticatable {
-
-	use Notifiable;
+	use Notifiable,CustomAuthMethods;
 
 	protected $table = 'shops';
 
+    protected $primaryKey = 'sho_id';
+
+    public $timestamps = false;
+
+    protected $guard = 'shops';
+
+    static private $tokenName = 'sho_api_token';
+
+    static private $credentialName = 'sho_email';
+
+	protected $casts = [
+		'sho_base_currency' => 'int'
+	];
+
 	protected $dates = [
-		'email_verified_at'
+		'sho_created_at'
 	];
 
 	protected $hidden = [
-		'password',
-		'remember_token',
-		'api_token'
+		'sho_password',
+		'sho_api_token'
 	];
 
 	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token',
+		'sho_name',
+		'sho_email',
+		'sho_password',
+		'sho_created_at',
 		'sho_pic',
-		'api_token'
+		'sho_api_token',
+		'sho_base_currency',
+        'sho_role_id',
+        'sho_description'
 	];
 
-	public function extra_ingredients()
-	{
-		return $this->hasMany(ExtraIngredient::class, 'ext_shop');
+    public function getAuthPassword(){
+        return $this->sho_password;
+    }
+
+    public function getKeyName(){
+        return $this->primaryKey;
+    }
+
+	public function currency() {
+		return $this->belongsTo(\App\Models\Currency::class, 'sho_base_currency');
 	}
 
-	public function menus()
+	public function rol()
 	{
-		return $this->hasMany(Menu::class, 'men_shop');
+		return $this->belongsTo(Role::class, 'sho_role_id');
 	}
 
-	public function orders()
-	{
-		return $this->hasMany(Order::class, 'ord_shop');
+	public function extras() {
+		return $this->hasMany(\App\Models\ExtraIngredient::class, 'ext_shop');
 	}
 
-	public function variations()
-	{
-		return $this->hasMany(Variation::class, 'var_shop_id');
+	public function menu() {
+		return $this->hasMany(\App\Models\Menu::class, 'men_shop');
+	}
+
+	public function orders() {
+		return $this->hasMany(\App\Models\Order::class, 'ord_shop');
+	}
+
+	public function variations() {
+		return $this->hasMany(\App\Models\Variation::class, 'var_shop_id');
 	}
 }

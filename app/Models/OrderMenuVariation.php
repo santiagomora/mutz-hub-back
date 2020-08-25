@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrderMenuVariation
- * 
- * @property int $ome_order_menu_id
- * @property int $ome_variation_id
- * 
+ *
+ * @property int $omv_order_menu_id
+ * @property int $omv_variation_id
+ *
  * @property OrdersMenu $orders_menu
  * @property Variation $variation
  *
@@ -21,27 +21,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderMenuVariation extends Model
 {
-	protected $table = 'order_menu_variation';
+	protected $table = 'orders_menu_variation';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'ome_order_menu_id' => 'int',
-		'ome_variation_id' => 'int'
+		'omv_order_menu_id' => 'int',
+		'omv_variation_id' => 'int'
 	];
 
 	protected $fillable = [
-		'ome_order_menu_id',
-		'ome_variation_id'
+		'omv_order_menu_id',
+		'omv_variation_id'
 	];
 
 	public function orders_menu()
 	{
-		return $this->belongsTo(OrdersMenu::class, 'ome_order_menu_id');
+		return $this->belongsTo(OrdersMenu::class, 'omv_order_menu_id');
 	}
 
 	public function variation()
 	{
-		return $this->belongsTo(Variation::class, 'ome_variation_id');
+		return $this->belongsTo(Variation::class, 'omv_variation_id');
+	}
+
+	static public function cast($men,$var){
+		return [
+			'omv_order_menu_id' => $men,
+			'omv_variation_id' => $var
+		];
 	}
 }

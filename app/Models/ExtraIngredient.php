@@ -10,14 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ExtraIngredient
- * 
+ *
  * @property int $ext_id
  * @property string $ext_name
  * @property string|null $ext_description
  * @property int $ext_shop
- * @property float|null $ext_DOL
- * @property float|null $ext_EUR
- * 
+ * @property float $ext_price
+ *
  * @property Shop $shop
  * @property OrdersMenuExtra $orders_menu_extra
  *
@@ -31,25 +30,26 @@ class ExtraIngredient extends Model
 
 	protected $casts = [
 		'ext_shop' => 'int',
-		'ext_DOL' => 'float',
-		'ext_EUR' => 'float'
+		'ext_price' => 'float'
 	];
 
 	protected $fillable = [
 		'ext_name',
 		'ext_description',
 		'ext_shop',
-		'ext_DOL',
-		'ext_EUR'
+		'ext_price',
+		'ext_category_id'
 	];
 
-	public function shop()
-	{
+	public function shop() {
 		return $this->belongsTo(Shop::class, 'ext_shop');
 	}
 
-	public function orders_menu_extra()
-	{
+	public function orders_menu_extra() {
 		return $this->hasOne(OrdersMenuExtra::class, 'ome_extra_id');
+	}
+
+	public function category() {
+		return $this->belongsTo(Category::class, 'ext_category_id', 'cat_id');
 	}
 }
