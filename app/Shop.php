@@ -48,7 +48,8 @@ use Carbon\Carbon;
 		'sho_api_token',
 		'sho_base_currency',
         'sho_role_id',
-        'sho_description'
+        'sho_description',
+        'sho_shipping'
 	];
 
     public function getAuthPassword(){
@@ -82,5 +83,16 @@ use Carbon\Carbon;
 
 	public function variations() {
 		return $this->hasMany(\App\Models\Variation::class, 'var_shop_id');
+	}
+
+	public function categories(){
+		return $this
+            ->belongsToMany(
+    			\App\Models\Category::class,
+    			'shops_categories',
+    			'sc_shop_id',
+    			'sc_category_id'
+    		)
+            ->withPivot('sc_category_picture');
 	}
 }

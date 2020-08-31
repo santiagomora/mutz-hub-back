@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use \Carbon\Carbon;
 use \App\Traits\CastingMethods;
 use \App\Models\Order;
-use \App\Http\Resources\OrderResource;
+use \App\Http\Resources\Orders\OrderResource;
 
 class OrderController extends Controller {
 
@@ -18,15 +18,7 @@ class OrderController extends Controller {
     public function save( Request $request ){
         $data = $request->post();
         $items = $data["items"];
-
-        $order = Order::create(
-            Order::cast(
-                $data['shop'],
-                $data['client'],
-                $data['currency'],
-                $data['ord_total']
-            )
-        );
+        $order = Order::create( Order::cast($data) );
         $this->saveMenu($items,$order);
         return response(
             ["msg" => "Your order was placed successfully"],

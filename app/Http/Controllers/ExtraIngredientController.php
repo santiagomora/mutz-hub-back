@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\ExtraIngredient;
-use \App\Http\Resources\ExtraIngredientResource;
+use \App\Http\Resources\Extras\ExtraIngredientResource;
 
 class ExtraIngredientController extends Controller
 {

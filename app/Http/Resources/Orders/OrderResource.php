@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Orders;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use \App\Http\Resources\OrderItemsResource;
+use \App\Http\Resources\Orders\OrderItemsResource;
 
 class OrderResource extends JsonResource
 {
@@ -26,6 +26,9 @@ class OrderResource extends JsonResource
             "ord_total" => $this->ord_total,
             "ord_currency"=> $this->currency->curr_name,
             "ord_cli_email"=> $this->ord_cli_email,
+            "ord_shop_currency"=> $this->shop_currency->curr_name,
+            "ord_shipping" => $this->ord_shipping,
+            "ord_conversion" => $this->ord_conversion,
             "items" => OrderItemsResource::collection( $this->menu )
         ];
     }

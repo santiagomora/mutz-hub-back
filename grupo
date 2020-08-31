@@ -1,0 +1,7 @@
+Diseño de disipador 
+g1 TIP41 a 1A y 11,2 V, 
+g2 BD135 0,5 A y 2v, 
+g3 TIP32 a 0,7 A y 3v, 
+g4 BD243 1A y 4 , 
+G5 BU208 a 1A y 3V, 
+si hay G6 2N3055 a 1A y 8V 

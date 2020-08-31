@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Http\Resources\ShopResource;
-use \App\Http\Resources\ShopWithStatsResource;
+use \App\Http\Resources\Shop\ShopResource;
+use \App\Http\Resources\Shop\ShopWithStatsResource;
 use \App\Shop;
 use Illuminate\Support\Facades\DB;
 

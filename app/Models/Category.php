@@ -29,12 +29,20 @@ class Category extends Model
 		'cat_description'
 	];
 
-	public function menus()
-	{
+	public function menu(){
 		return $this->hasMany(Menu::class, 'men_category');
 	}
 
+	public function shops(){
+		return $this->belongsToMany(
+			\App\Shop::class,
+			'shops_categories',
+			'sc_category_id',
+			'sc_shop_id'
+		);
+	}
+
 	public function extras(){
-		return $this->hasMany(ExtraIngredient::class, 'ext_category_id','cat_category');
+		return $this->hasMany(ExtraIngredient::class,'ext_category_id');
 	}
 }

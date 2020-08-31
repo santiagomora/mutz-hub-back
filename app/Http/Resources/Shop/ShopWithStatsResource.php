@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Shop;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use \App\Models\Variation;
-use \App\Models\ExtraIngredient;
 
 class ShopWithStatsResource extends JsonResource
 {
@@ -22,21 +21,14 @@ class ShopWithStatsResource extends JsonResource
             "pic"=>$data->sho_pic,
             "currency"=>$data->sho_base_currency,
             "description"=>$data->sho_description,
-            "extras" => ExtraIngredientResource::
-                collection(
-                    ExtraIngredient::
-                        where( "ext_shop",$data->sho_id )
-                        ->get()
-                )->groupBy(function ($item, $key) {
-                    return $item->category->cat_description;
-                }),
+            "shipping" => $data->sho_shipping
         ];
     }
 
     public function getStatFormat($stat){
         return [
             "avg" => $stat->avg,
-            "cnt" => $stat->cnt 
+            "cnt" => $stat->cnt
         ];
     }
 

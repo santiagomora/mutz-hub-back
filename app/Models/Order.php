@@ -53,7 +53,10 @@ class Order extends Model
 		'ord_date',
 		'ord_total',
 		'ord_currency',
-		'ord_cli_id'
+		'ord_cli_id',
+		'ord_shipping',
+		'ord_conversion',
+		'ord_shop_currency'
 	];
 
 	public function shop(){
@@ -69,7 +72,15 @@ class Order extends Model
 		return $this->belongsTo(Currency::class, 'ord_currency');
 	}
 
-	static public function cast($shop,$client,$currency,$total){
+
+	public function shop_currency()
+	{
+		return $this->belongsTo(Currency::class, 'ord_shop_currency');
+	}
+
+	static public function cast($data){
+		$shop =  $data['shop'];
+		$client = $data['client'];
         return [
 			"ord_cli_id" => isset($client["ord_cli_id"])
 							? $client["ord_cli_id"]
@@ -81,8 +92,11 @@ class Order extends Model
             'ord_cli_email' => $client['ord_cli_email'],
     		'ord_cli_name' => $client['ord_cli_name'],
     		'ord_date' => Carbon::now(),
-    		'ord_total' => $total,
-    		'ord_currency' => $currency
+    		'ord_total' => $data['total'],
+    		'ord_currency' => $data['currency'],
+			'ord_shipping' => $data['shipping'],
+			'ord_conversion' => $data['conversion'],
+			'ord_shop_currency' => $shop['currency']
         ];
     }
 }

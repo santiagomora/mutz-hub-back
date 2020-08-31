@@ -28,6 +28,6 @@ class CustomAuthMiddleware
             $request->merge(['user'=>$user]);
             return $next( $request );
         }
-        return response(['msg' =>  "not authorized"],401);
+        return response(['user' =>  null],200);
     }
 }

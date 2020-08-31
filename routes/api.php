@@ -38,7 +38,7 @@ Route::prefix('auth')->name('auth.')->group( function (){
 Route::prefix('client')->name('client.')->group( function (){
     Route::get('{id}/','ClientController@updateUser')->name('update');
     Route::middleware('auth.custom')->group(function(){
-        Route::get('{id}/','ClientController@updateUser')->name('update');
+        Route::put('update/{id}','ClientController@updateUser')->name('update');
     });
 });
 
