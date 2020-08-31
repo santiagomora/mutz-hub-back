@@ -17,7 +17,7 @@ class CorsHeaders {
         return $next($request)
             ->header('Content-Type','application/json')
             ->header('Access-Control-Allow-Credentials', 'true')
-            ->header('Access-Control-Allow-Origin', 'http://127.0.0.1:3000')
+            ->header('Access-Control-Allow-Origin', 'https://mutz-hub.herokuapp.com')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
             ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, X-Token-Auth, Authorization');
     }
