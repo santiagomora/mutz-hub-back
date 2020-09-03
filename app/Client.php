@@ -34,7 +34,7 @@ class Client extends Authenticatable {
         'cli_address',
         'cli_telephone',
         'cli_password',
-        'cli_api_token',
+        'cli_api_token'
     ];
 
     /**
