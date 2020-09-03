@@ -25,11 +25,21 @@ class OrderController extends Controller {
             200
         );
     }
-
+    
     public function getOrders( $id ){
         $client = request()->only('user')['user'];
-        return response(
-            [ "orders" => OrderResource::collection( $client->orders )],
+        $eagerload = [
+            'orders',
+            'orders.shop',
+            'orders.currency',
+            'orders.menu',
+            'orders.menu.variations',
+            'orders.menu.extras'
+        ];
+        return response([
+            "orders" => OrderResource::collection(
+                $client->load($eagerload)->orders
+            )],
             200
         );
     }
