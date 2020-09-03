@@ -23,8 +23,8 @@ class OrderItemsResource extends JsonResource
             "om_quantity" => $this->om_quantity,
             "om_price" => $this->om_price,
             "om_currency" => $this->om_currency,
-            "variations" => OrderVariationsResource::collection($this->variations),
-            "extras" => OrderExtraResource::collection($this->extras)
+            //"variations" => OrderVariationsResource::collection($this->variations),
+            //"extras" => OrderExtraResource::collection($this->extras)
         ];
     }
 }
