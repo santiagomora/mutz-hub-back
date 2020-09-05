@@ -17,14 +17,23 @@ class OrderItemsResource extends JsonResource
     public function toArray($request)
     {
         $menu = $this->menu;
-        return [
-            "name" => $menu->men_name,
-            "description" => $menu->men_description,
-            "om_quantity" => $this->om_quantity,
-            "om_price" => $this->om_price,
-            "om_currency" => $this->om_currency,
-            "variations" => OrderVariationsResource::collection($this->variations),
-            "extras" => OrderExtraResource::collection($this->extras)
-        ];
+        return ( $request->with_extra )
+            ? [
+                "name" => $menu->men_name,
+                "description" => $menu->men_description,
+                "om_quantity" => $this->om_quantity,
+                "men_picture" => $menu->men_picture,
+                "om_price" => $this->om_price,
+                "om_currency" => $this->om_currency,
+                "variations" => OrderVariationsResource::collection($this->variations),
+                "extras" => OrderExtraResource::collection($this->extras)
+            ] : [
+                "men_picture" => $menu->men_picture,
+                "name" => $menu->men_name,
+                "description" => $menu->men_description,
+                "om_quantity" => $this->om_quantity,
+                "om_price" => $this->om_price,
+                "om_currency" => $this->om_currency
+            ];
     }
 }

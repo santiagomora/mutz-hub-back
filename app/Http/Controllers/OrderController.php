@@ -32,12 +32,32 @@ class OrderController extends Controller {
             'orders',
             'orders.shop',
             'orders.currency',
+            'orders.menu'
+        ];
+        request()->merge(['with_extra' => false]);
+        return response([
+            "orders" => OrderResource::collection(
+                $client->load($eagerload)->orders
+            )],
+            200
+        );
+    }
+
+    public function getSingleOrder( $id ){
+        $client = request()->only('user')['user'];
+        request()->merge(['with_extra' => true]);
+        $eagerload = [
+            'orders' => function($query) use ($id) {
+                return $query->where('ord_id',$id);
+            },
+            'orders.shop',
+            'orders.currency',
             'orders.menu',
             'orders.menu.variations',
             'orders.menu.extras'
         ];
         return response([
-            "orders" => OrderResource::collection(
+            "order" => OrderResource::collection(
                 $client->load($eagerload)->orders
             )],
             200

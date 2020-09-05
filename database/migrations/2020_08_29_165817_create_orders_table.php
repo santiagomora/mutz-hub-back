@@ -29,10 +29,17 @@ class CreateOrdersTable extends Migration
             $table->float('ord_shipping');
             $table->float('ord_conversion');
             $table->float('ord_total');
+            $table->unsignedInteger('ord_status')->default(1);
 
             $table->foreign('ord_shop')
                 ->references('sho_id')
                 ->on('shops')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('ord_status')
+                ->references('sta_id')
+                ->on('order_status')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -66,6 +73,7 @@ class CreateOrdersTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropForeign('orders_ord_shop_foreign');
             $table->dropForeign('orders_ord_cli_id_foreign');
+            $table->dropForeign('orders_ord_status_foreign');
             $table->dropForeign('orders_ord_shop_currency_foreign');
             $table->dropForeign('orders_ord_currency_foreign');
         });

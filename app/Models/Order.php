@@ -56,7 +56,8 @@ class Order extends Model
 		'ord_cli_id',
 		'ord_shipping',
 		'ord_conversion',
-		'ord_shop_currency'
+		'ord_shop_currency',
+		'ord_status'
 	];
 
 	public function shop(){
@@ -72,6 +73,10 @@ class Order extends Model
 		return $this->belongsTo(Currency::class, 'ord_currency');
 	}
 
+	public function status()
+	{
+		return $this->belongsTo(OrderStatus::class, 'ord_status');
+	}
 
 	public function shop_currency()
 	{
