@@ -31,8 +31,7 @@ class OrderController extends Controller {
         $eagerload = [
             'orders',
             'orders.shop',
-            'orders.currency',
-            'orders.menu'
+            'orders.currency'
         ];
         request()->merge(['with_extra' => false]);
         return response([
