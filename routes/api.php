@@ -59,5 +59,6 @@ Route::prefix('order')->name('order.')->group( function (){
     Route::post('save','OrderController@save')->name('save');
     Route::middleware('auth.custom')->group(function(){
         Route::get('list/client/{id}/','OrderController@getOrders')->name('list');
+        Route::get('single/{id}/','OrderController@getSingleOrder')->name('single');
     });
 });
