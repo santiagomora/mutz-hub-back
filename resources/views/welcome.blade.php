@@ -57,42 +57,43 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
+            .app-title{
+                color:#22b295;
+                font-weight:bold;
+                text-shadow: 2px 0 0 #b2223f,
+                    -2px 0 0 #b2223f,
+                    0 2px 0 #b2223f,
+                    0 -2px 0 #b2223f,
+                    1px 1px #b2223f,
+                    -1px -1px 0 #b2223f,
+                    1px -1px 0 #b2223f,
+                    -1px 1px 0 #b2223f;
+            }
+            .bolder{
+                font-weight:bold;
+                font-size:48px;
+            }
             .m-b-md {
                 margin-bottom: 30px;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        <div class="flex-center position-ref full-height" style="flex-direction:column">
+            <h1 class="nomargin app-title bolder">
+                the mutz hub.
+            </h1>
+            <div>
+                <a href="https://github.com/santiagomora/mutz-hub-back"
+                    target="_blank"
+                    style="margin:15px">
+                    Repository
+                </a>
+                <a href="https://mutz-hub.herokuapp.com"
+                    target="_blank"
+                    style="margin:15px">
+                    Deployment
+                </a>
             </div>
         </div>
     </body>
