@@ -79,10 +79,22 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" style="flex-direction:column">
             <h1 class="nomargin app-title bolder">
                 the mutz hub.
             </h1>
+            <div>
+                <a href="https://github.com/santiagomora/mutz-hub-back"
+                    target="_blank"
+                    style="margin:15px">
+                    Repository
+                </a>
+                <a href="https://mutz-hub.herokuapp.com"
+                    target="_blank"
+                    style="margin:15px">
+                    Deployment
+                </a>
+            </div>
         </div>
     </body>
 </html>
