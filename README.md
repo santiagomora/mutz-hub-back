@@ -1,14 +1,35 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<style>
+    .bolder{
+        font-weight:bolder;
+    }
+    .nomargin{
+        margin:0px;
+    }
+    .app-title{
+        color:#22b295;
+        font-weight:bold;
+        text-shadow: 2px 0 0 #b2223f,
+            -2px 0 0 #b2223f,
+            0 2px 0 #b2223f,
+            0 -2px 0 #b2223f,
+            1px 1px #b2223f,
+            -1px -1px 0 #b2223f,
+            1px -1px 0 #b2223f,
+            -1px 1px 0 #b2223f;
+    }
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</style>
+
+<h1 class="nomargin app-title bolder">
+    the mutz hub.
+</h1>
+<p>
+    We love Mozzarella
 </p>
 
-## About Laravel
+## About Mutz hub
 
+In mutz hub, its all about pizza.
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
