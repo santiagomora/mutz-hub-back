@@ -1,4 +1,4 @@
-#    the mutz hub.
+#    the mutz hub. - API
 ##   We love Mozzarella
 ###  Deploy on local development mode:
 
