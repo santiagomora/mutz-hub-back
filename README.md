@@ -13,7 +13,7 @@ cd mutz-hub-back
 
 composer install
 
-php artisan key:generate
+php artisan key:generate // if your env file is not generated automatically, you can use the .env.example included in the root folder
 
 php artisan migrate // modify your env file, make sure you have a DB connection established <br/>
                     // after you run this command, the tables required for the API will be created <br/>
