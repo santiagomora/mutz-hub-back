@@ -1,82 +1,54 @@
-<style>
-    .bolder{
-        font-weight:bolder;
-    }
-    .nomargin{
-        margin:0px;
-    }
-    .app-title{
-        color:#22b295;
-        font-weight:bold;
-        text-shadow: 2px 0 0 #b2223f,
-            -2px 0 0 #b2223f,
-            0 2px 0 #b2223f,
-            0 -2px 0 #b2223f,
-            1px 1px #b2223f,
-            -1px -1px 0 #b2223f,
-            1px -1px 0 #b2223f,
-            -1px 1px 0 #b2223f;
-    }
+#    the mutz hub. - API
+##   We love Mozzarella
+###  Deploy on local development mode:
 
-</style>
+To deploy the app on any environment you must install first [composer](https://getcomposer.org/download/)
 
-<h1 class="nomargin app-title bolder">
-    the mutz hub.
-</h1>
-<p>
-    We love Mozzarella
-</p>
+clone the repository using 
 
-## About Mutz hub
+git clone git@github.com:santiagomora/mutz-hub-back.git --branch local or <br/>
+git clone https://github.com/santiagomora/mutz-hub-back.git --branch local
 
-In mutz hub, its all about pizza.
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+cd mutz-hub-back
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+composer install
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+php artisan key:generate 
+Note: if your env file is not generated automatically, you can use the .env.example included in the root folder
 
-## Learning Laravel
+php artisan migrate  <br/>
+Note: modify your env file, make sure you have a DB connection established <br/>
+after you run this command, the tables required for the API will be created <br/>
+there's a demo dataset in root folder named demo-dump, you can import it using <br/>
+your DBMS and use it for testing
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+php artisan serve <br/>   
+if you downloaded the front-end local development repository, it is expected that <br/> 
+this API runs on 127.0.0.1:8000, and the front end on 127.0.0.1:3000.
+                    
+this runs the app in the development mode.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) to view it on browser.
 
-## Laravel Sponsors
+### Deploying on production
+To deploy the app on any environment you must install first [composer](https://getcomposer.org/download/)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+clone the repository using 
 
-### Premium Partners
+git clone git@github.com:santiagomora/mutz-hub-back.git --branch local or <br/>
+git clone https://github.com/santiagomora/mutz-hub-back.git --branch local
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+cd mutz-hub-back
 
-## Contributing
+composer install --optimize-autoloader --no-dev
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+php artisan key:generate
 
-## Code of Conduct
+php artisan migrate 
+Note:modify your env file, make sure you have a DB connection established <br/>
+after you run this command, the tables required for the API will be created <br/>
+there's a demo dataset in root folder named demo-dump, you can import it using <br/>
+your DBMS and use it for testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+make sure you properly edit your env file, and change the CorsHeaders Middleware to authorize<br/>
+the domain that will consume this API.
