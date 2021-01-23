@@ -31,8 +31,9 @@ class ShopController extends Controller
                 on m2.men_category = c1.cat_id
             ) m1
             on sho_id = men_shop
-            group by m1.men_category,s1.sho_id"
+            group by m1.men_category,s1.sho_id,m1.cat_description"
         );
+        //p
         return response(
             ShopWithStatsResource::collection(
                 collect( $shops )->groupBy("sho_id")
